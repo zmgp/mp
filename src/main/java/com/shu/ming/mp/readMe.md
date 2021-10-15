@@ -14,8 +14,9 @@
 2. setting
 3. Build...
 4. compile
-5. 选上 Build Project auto...
+5. 选上 Build Project autom...
 ```
+
 
 ### swagger
 
