@@ -1,5 +1,7 @@
 package com.shu.ming.mp.modules.login.service.impl;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shu.ming.mp.modules.login.bean.UserInfo;
 import com.shu.ming.mp.modules.login.dto.LoginDTO;
@@ -29,4 +31,10 @@ public class LoginServiceImpl extends ServiceImpl<LoginMapper, UserInfo> impleme
         List<UserInfo> exist = loginMapper.isExist(loginDTO);
         return exist.size() == 1;
     }
+
+    @Override
+    public UserInfo findUserById(int id) {
+        return loginMapper.findUserById(id);
+    }
+
 }

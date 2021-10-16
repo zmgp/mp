@@ -30,7 +30,7 @@ public class LoginController {
         if (!isEExist){
             return Result.failure(ResultCode.USER_LOGIN_ERROR);
         }
-
         return Result.success();
     }
+
 }

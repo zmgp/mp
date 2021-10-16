@@ -1,12 +1,18 @@
 package com.shu.ming.mp.modules.login.bean;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @TableName("user_info")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserInfo {
 
     /**
