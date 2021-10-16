@@ -5,9 +5,9 @@ server:
 spring:
   datasource:
     username: root
-    password: Mao1680427
+    password: 124823
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/dbtest?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/mp?useSSL=false&serverTimezone=UTC
 
   devtools:
     restart:
