@@ -2,6 +2,7 @@ package com.shu.ming.mp.modules.login.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shu.ming.mp.modules.login.bean.UserInfo;
+import com.shu.ming.mp.modules.login.dto.LoginDTO;
 import com.shu.ming.mp.modules.login.mapper.DemoMapper;
 import com.shu.ming.mp.modules.login.mapper.LoginMapper;
 import com.shu.ming.mp.modules.login.service.LoginService;
@@ -23,9 +24,9 @@ public class LoginServiceImpl extends ServiceImpl<LoginMapper, UserInfo> impleme
     }
 
     @Override
-    public boolean isExist(UserInfo userInfo) {
+    public boolean isExist(LoginDTO loginDTO) {
         // todo 业务逻辑
-        List<UserInfo> exist = loginMapper.isExist(userInfo);
+        List<UserInfo> exist = loginMapper.isExist(loginDTO);
         return exist.size() == 1;
     }
 }
