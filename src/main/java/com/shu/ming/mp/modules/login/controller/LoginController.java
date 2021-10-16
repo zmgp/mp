@@ -6,6 +6,7 @@ import com.shu.ming.mp.modules.login.bean.UserInfo;
 import com.shu.ming.mp.modules.login.service.LoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,20 +17,22 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@Api("登录测试")
+@Api("登录功能")
 @RequestMapping("/login")
+@AllArgsConstructor
 public class LoginController {
 
     private LoginService loginService;
 
-    @ApiOperation("判断登录用户信息，存在即返回")
-    @PostMapping("/userlogin")
-    public Result isExist (@RequestBody UserInfo userInfo){
-        List<UserInfo> userList = loginService.isExist(userInfo);
-        if(userInfo != null){
-            return Result.success(ResultCode.SUCCESS);
-        }else{
-            return Result.failure(ResultCode.USER_LOGIN_ERROR,0);
+
+    @ApiOperation("用户登录")
+    @PostMapping("/login")
+    public Result login (@RequestBody UserInfo userInfo) {
+        boolean isEExist = loginService.isExist(userInfo);
+        if (!isEExist){
+            return Result.failure(ResultCode.USER_LOGIN_ERROR);
         }
+
+        return Result.success();
     }
 }

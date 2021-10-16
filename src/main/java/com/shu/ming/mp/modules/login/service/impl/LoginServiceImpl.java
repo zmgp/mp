@@ -11,8 +11,8 @@ import java.util.List;
 
 @Service
 public class LoginServiceImpl extends ServiceImpl<LoginMapper, UserInfo> implements LoginService {
-    private LoginMapper loginMapper;
 
+    private LoginMapper loginMapper;
 
     /**
      * 使用构造器的方式注入
@@ -23,8 +23,9 @@ public class LoginServiceImpl extends ServiceImpl<LoginMapper, UserInfo> impleme
     }
 
     @Override
-    public List<UserInfo> isExist(UserInfo userInfo) {
+    public boolean isExist(UserInfo userInfo) {
         // todo 业务逻辑
-        return loginMapper.isExist(userInfo);
+        List<UserInfo> exist = loginMapper.isExist(userInfo);
+        return exist.size() == 1;
     }
 }

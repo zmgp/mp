@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 public interface LoginService extends IService<UserInfo> {
-    List<UserInfo> isExist(UserInfo userInfo);
+    boolean isExist(UserInfo userInfo);
 }
