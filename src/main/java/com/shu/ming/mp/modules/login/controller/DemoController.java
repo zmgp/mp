@@ -1,9 +1,11 @@
 package com.shu.ming.mp.modules.login.controller;
 
 import cn.hutool.http.HttpResponse;
+import com.google.common.collect.Lists;
 import com.shu.ming.mp.domain.Result;
 import com.shu.ming.mp.modules.login.bean.Demo;
 import com.shu.ming.mp.modules.login.service.DemoService;
+import com.shu.ming.mp.util.JWTUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,5 +70,18 @@ public class DemoController {
     public Result getRedis(String key){
         Object o = redisTemplate.opsForValue().get(key);
         return Result.success(o);
+    }
+
+    @GetMapping("/jwt")
+    @ApiOperation("生成token")
+    public Result jwt(){
+
+        return Result.success(JWTUtils.createToken(1, "hue", new ArrayList<>()));
+    }
+
+    @GetMapping("/dejwt")
+    @ApiOperation("解析token")
+    public Result token(String token){
+        return Result.success(JWTUtils.resolveToken(token));
     }
 }
