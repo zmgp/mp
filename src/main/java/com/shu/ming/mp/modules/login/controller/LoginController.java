@@ -26,7 +26,7 @@ public class LoginController {
     @PostMapping("/userlogin")
     public Result isExist (@RequestBody UserInfo userInfo){
         List<UserInfo> userList = loginService.isExist(userInfo);
-        if(userInfo != null){
+        if(userList != null){
             return Result.success(ResultCode.SUCCESS);
         }else{
             return Result.failure(ResultCode.USER_LOGIN_ERROR,0);
