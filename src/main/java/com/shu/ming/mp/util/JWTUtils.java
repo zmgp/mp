@@ -1,6 +1,7 @@
 package com.shu.ming.mp.util;
 
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.exceptions.ValidateException;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTHeader;
 import cn.hutool.jwt.JWTUtil;
@@ -57,27 +58,14 @@ public class JWTUtils {
      */
     public static String createToken(long id, String userName, List<Integer> authority) {
         byte[] key = secret.getBytes();
-        LocalDateTime now = LocalDateTime.now().plusHours(expire);
+        LocalDateTime expireTime = LocalDateTime.now().plusMinutes(expire);
         return JWT.create()
                 .setPayload("id", id)
                 .setPayload("userName", userName)
                 .setPayload("authority", authority)
-                .setPayload("expire", now)
                 .setKey(key)
+                .setExpiresAt(DateUtil.date(expireTime))
                 .sign();
-    }
-
-
-    /**
-     * 对token进行解析
-     * @param token
-     */
-    public static boolean resolveToken(String token) {
-        byte[] key = secret.getBytes();
-        boolean validate = JWT.of(token).setKey(key).validate(0);
-        Preconditions.checkArgument(validate, "token 失效");
-
-        return validate;
     }
 
 
@@ -87,8 +75,14 @@ public class JWTUtils {
      * @return
      */
     public static void validToken(String token){
-        JWTValidator.of(token).validateAlgorithm(JWTSignerUtil.hs256(secret.getBytes()));
+        try {
+            JWTValidator
+                    .of(token)
+                    .validateDate(DateUtil.date())
+                    .validateAlgorithm(JWTSignerUtil.hs256(secret.getBytes()));
+        }catch (Exception e){
+            throw new ValidateException();
+        }
     }
-
 
 }

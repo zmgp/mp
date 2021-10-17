@@ -29,10 +29,7 @@ import java.util.List;
 
 @Slf4j
 @Component
-@AllArgsConstructor
 public class AuthenticInterceptor implements HandlerInterceptor {
-
-    private LoginService loginService;
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object object) throws Exception {
@@ -59,8 +56,10 @@ public class AuthenticInterceptor implements HandlerInterceptor {
                 if (token == null) {
                     throw new NoLoginException("请登录");
                 }
+                log.info("登录人携带的token为: {}", token);
                 //对token进行验证
                 JWTUtils.validToken(token);
+                log.info("token经过了检验");
                 //进行权限验证
                 int[] permission = userLoginToken.permission();
                 if (permission.length == 0){
@@ -76,18 +75,5 @@ public class AuthenticInterceptor implements HandlerInterceptor {
             }
         }
         return true;
-    }
-
-    @Override
-    public void postHandle(HttpServletRequest httpServletRequest,
-                           HttpServletResponse httpServletResponse,
-                           Object o, ModelAndView modelAndView) throws Exception {
-
-    }
-
-    @Override
-    public void afterCompletion(HttpServletRequest httpServletRequest,
-                                HttpServletResponse httpServletResponse,
-                                Object o, Exception e) throws Exception {
     }
 }

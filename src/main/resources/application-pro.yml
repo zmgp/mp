@@ -22,4 +22,4 @@ mybatis-plus:
 # jwt配置
 jwtSecret: 124823
 # 单位： 小时
-expire: 7
+expire: 3

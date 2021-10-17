@@ -1,5 +1,6 @@
 package com.shu.ming.mp.domain;
 
+        import com.shu.ming.mp.enums.ResultCode;
         import lombok.Data;
 
         import java.io.Serializable;

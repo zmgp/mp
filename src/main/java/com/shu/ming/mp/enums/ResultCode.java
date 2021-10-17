@@ -1,7 +1,4 @@
-package com.shu.ming.mp.domain;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.shu.ming.mp.enums;
 
 /**
  * @author JGod
@@ -12,6 +9,7 @@ public enum ResultCode {
 
     /* 成功状态码 */
     SUCCESS(200, "成功"),
+    FAIL(500, "服务器异常"),
 
     /* 参数错误：10001-19999 */
     PARAM_IS_INVALID(10001, "参数无效"),
