@@ -11,4 +11,8 @@ import java.util.List;
 public interface LoginService extends IService<UserInfo> {
     boolean isExist(LoginDTO loginDTO);
     UserInfo findUserById(int id );
+
+
+
+    UserInfo findOneByNameAndPwd(String userName, String password);
 }

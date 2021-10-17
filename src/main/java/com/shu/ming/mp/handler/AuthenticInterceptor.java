@@ -5,11 +5,19 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.shu.ming.mp.PassToken;
-import com.shu.ming.mp.UserLoginToken;
+import com.shu.ming.mp.annotation.PassToken;
+import com.shu.ming.mp.annotation.UserLoginToken;
+import com.shu.ming.mp.exception.NoLoginException;
+import com.shu.ming.mp.exception.NoPermisssionException;
 import com.shu.ming.mp.modules.login.bean.UserInfo;
 import com.shu.ming.mp.modules.login.service.LoginService;
+import com.shu.ming.mp.util.JWTUtils;
+import io.netty.util.internal.StringUtil;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,11 +25,14 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
+import java.util.List;
 
-public class AuthenticationInterceptor implements HandlerInterceptor {
+@Slf4j
+@Component
+@AllArgsConstructor
+public class AuthenticInterceptor implements HandlerInterceptor {
 
-    @Autowired
-    LoginService loginService;
+    private LoginService loginService;
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object object) throws Exception {
@@ -41,29 +52,25 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         }
         //检查有没有需要用户权限的注解
         if (method.isAnnotationPresent(UserLoginToken.class)) {
+            log.info("进行用户权限检验");
             UserLoginToken userLoginToken = method.getAnnotation(UserLoginToken.class);
             if (userLoginToken.required()) {
                 // 执行认证
                 if (token == null) {
-                    throw new RuntimeException("无token，请重新登录");
+                    throw new NoLoginException("请登录");
                 }
-                // 获取 token 中的 user id
-                int userId;
-                try {
-                    userId = Integer.parseInt(JWT.decode(token).getAudience().get(0));
-                } catch (JWTDecodeException j) {
-                    throw new RuntimeException("401");
+                //对token进行验证
+                JWTUtils.validToken(token);
+                //进行权限验证
+                int[] permission = userLoginToken.permission();
+                if (permission.length == 0){
+                    return true;
                 }
-                UserInfo user = loginService.findUserById(userId);
-                if (user == null) {
-                    throw new RuntimeException("用户不存在，请重新登录");
-                }
-                // 验证 token
-                JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(user.getPassword())).build();
-                try {
-                    jwtVerifier.verify(token);
-                } catch (JWTVerificationException e) {
-                    throw new RuntimeException("401");
+                List<Integer> permisssionList = JWTUtils.resolveTokenPermission(token);
+                for (int p : permission) {
+                    if (!permisssionList.contains(p)){
+                        throw new NoPermisssionException("没有权限访问");
+                    }
                 }
                 return true;
             }

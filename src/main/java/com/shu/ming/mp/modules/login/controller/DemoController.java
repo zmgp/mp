@@ -2,6 +2,7 @@ package com.shu.ming.mp.modules.login.controller;
 
 import cn.hutool.http.HttpResponse;
 import com.google.common.collect.Lists;
+import com.shu.ming.mp.annotation.UserLoginToken;
 import com.shu.ming.mp.domain.Result;
 import com.shu.ming.mp.modules.login.bean.Demo;
 import com.shu.ming.mp.modules.login.service.DemoService;
@@ -83,5 +84,13 @@ public class DemoController {
     @ApiOperation("解析token")
     public Result token(String token){
         return Result.success(JWTUtils.resolveToken(token));
+    }
+
+
+    @UserLoginToken
+    @GetMapping("/auth")
+    @ApiOperation("权限检验")
+    public Result auth(){
+        return Result.success();
     }
 }

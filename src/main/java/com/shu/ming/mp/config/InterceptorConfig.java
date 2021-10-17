@@ -1,21 +1,26 @@
-package com.shu.ming.mp.configure;
+package com.shu.ming.mp.config;
 
-import com.shu.ming.mp.handler.AuthenticationInterceptor;
+import com.shu.ming.mp.handler.AuthenticInterceptor;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
+@AllArgsConstructor
+@Slf4j
 public class InterceptorConfig implements WebMvcConfigurer {
+
+
+    AuthenticInterceptor authenticInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authenticationInterceptor())
+        log.info("开始配置拦截器");
+        registry
+                .addInterceptor(authenticInterceptor)
                 .addPathPatterns("/**");
-    }
-    @Bean
-    public AuthenticationInterceptor authenticationInterceptor() {
-        return new AuthenticationInterceptor();
     }
 }

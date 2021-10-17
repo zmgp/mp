@@ -1,4 +1,4 @@
-package com.shu.ming.mp;
+package com.shu.ming.mp.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,4 +10,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UserLoginToken {
     boolean required() default true;
+    int[] permission() default {};
 }

@@ -1,4 +1,4 @@
-package com.shu.ming.mp;
+package com.shu.ming.mp.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
