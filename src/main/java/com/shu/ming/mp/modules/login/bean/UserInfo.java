@@ -30,4 +30,8 @@ public class UserInfo {
      */
     private String password;
 
+    /*
+     *用户邮箱
+     */
+    private String email;
 }
