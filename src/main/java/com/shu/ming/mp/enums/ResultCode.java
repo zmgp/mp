@@ -46,7 +46,9 @@ public enum ResultCode {
     INTERFACE_EXCEED_LOAD(60006, "接口负载过高"),
 
     /* 权限错误：70001-79999 */
-    PERMISSION_NO_ACCESS(70001, "无访问权限");
+    PERMISSION_NO_ACCESS(70001, "无访问权限"),
+    MORE_THAN_REQUEST_COUNT(70002, "请求过于频繁"),
+    BUSY(70003, "服务器繁忙");
 
     private Integer code;
 

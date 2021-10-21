@@ -3,6 +3,8 @@ package com.shu.ming.mp.handler;
 import cn.hutool.core.exceptions.ValidateException;
 import com.shu.ming.mp.domain.Result;
 import com.shu.ming.mp.enums.ResultCode;
+import com.shu.ming.mp.exception.AccessLimitException;
+import com.shu.ming.mp.exception.BusyException;
 import com.shu.ming.mp.exception.NoLoginException;
 import com.shu.ming.mp.exception.NoPermisssionException;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.UndeclaredThrowableException;
 
 /**
  * @author JGod
@@ -84,6 +88,25 @@ public class CustomerExceptionHandler {
     public Result noPermisssionException(NoPermisssionException e){
         return Result.failure(ResultCode.PERMISSION_NO_ACCESS);
     }
+
+    /**
+     * 用户IP短时间多次请求异常
+     */
+    @ResponseBody
+    @ExceptionHandler({AccessLimitException.class, UndeclaredThrowableException.class})
+    public Result accessLimitException(Exception e){
+        return Result.failure(ResultCode.MORE_THAN_REQUEST_COUNT);
+    }
+
+    /**
+     * 服务器繁忙异常 -- 用于限流
+     */
+    @ResponseBody
+    @ExceptionHandler({BusyException.class})
+    public Result busyException(Exception e){
+        return Result.failure(ResultCode.BUSY);
+    }
+
 
     /**
      * 未被捕获的异常信息

@@ -1,5 +1,6 @@
 package com.shu.ming.mp.config;
 
+import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -32,7 +33,10 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .pathMapping("/")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.shu.ming.mp.modules.login.controller"))
+                .apis(Predicates.or(
+                        RequestHandlerSelectors.basePackage("com.shu.ming.mp.modules.login.controller"),
+                        RequestHandlerSelectors.basePackage("com.shu.ming.mp.modules.ratelimiter.controller")
+                ))
                 .paths(PathSelectors.any())
                 .build()
                 .globalOperationParameters(pars)

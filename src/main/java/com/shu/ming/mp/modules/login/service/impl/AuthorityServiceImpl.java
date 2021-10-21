@@ -9,6 +9,7 @@ import com.shu.ming.mp.modules.login.mapper.AuthorityMapper;
 import com.shu.ming.mp.modules.login.mapper.LoginMapper;
 import com.shu.ming.mp.modules.login.service.AuthorityService;
 import com.shu.ming.mp.modules.login.service.LoginService;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
