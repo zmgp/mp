@@ -14,6 +14,9 @@
     
 * webSocket
     * 根据 websocket + redis实现
+   
+* 定时任务
+    * 定时统计在线人数
     
 ## 项目简介
 
