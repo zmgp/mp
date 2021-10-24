@@ -35,7 +35,8 @@ public class SwaggerConfig {
                 .select()
                 .apis(Predicates.or(
                         RequestHandlerSelectors.basePackage("com.shu.ming.mp.modules.login.controller"),
-                        RequestHandlerSelectors.basePackage("com.shu.ming.mp.modules.ratelimiter.controller")
+                        RequestHandlerSelectors.basePackage("com.shu.ming.mp.modules.ratelimiter.controller"),
+                        RequestHandlerSelectors.basePackage("com.shu.ming.mp.modules.websocket.controller")
                 ))
                 .paths(PathSelectors.any())
                 .build()

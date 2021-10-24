@@ -39,4 +39,20 @@ public class BloomController {
         boolean contains = bloomFilterUtil.containsEmail(key);
         return Result.success(contains ? "存在" : "不存在");
     }
+
+    @RequestLimit
+    @GetMapping("/t3")
+    @ApiOperation("布隆测试 set")
+    public Result setNameKey(String key) {
+        bloomFilterUtil.addNameKey(key);
+        return Result.success();
+    }
+
+    @RequestLimit
+    @GetMapping("/t4")
+    @ApiOperation("布隆测试 exists")
+    public Result existsNameKey(String key) {
+        boolean contains = bloomFilterUtil.containsName(key);
+        return Result.success(contains ? "存在" : "不存在");
+    }
 }

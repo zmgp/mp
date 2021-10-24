@@ -1342,16 +1342,13 @@ public class RedisUtil {
     }
 
     /**
+     * 发布
      *
      * @param key
-     * @param options
-     * @return
      */
-    public Cursor<TypedTuple<String>> zScan(String key, ScanOptions options) {
-        return redisTemplate.opsForZSet().scan(key, options);
+    public void publish(String key, String value) {
+        redisTemplate.convertAndSend(key, value);
     }
 
-    public Object execute(DefaultRedisScript<Boolean> luaScript, List<String> params) {
-        return redisTemplate.execute(luaScript, params);
-    }
+
 }

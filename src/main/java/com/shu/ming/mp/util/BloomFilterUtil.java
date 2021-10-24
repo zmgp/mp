@@ -36,8 +36,8 @@ public class BloomFilterUtil {
     /**
      * 前缀
      */
-    private static final String EMAIL_PREFIX = "bloom:email:";
-    private static final String NAME_PREFIX = "bloom:name:";
+    public static final String EMAIL_PREFIX = "bloom:email:";
+    public static final String NAME_PREFIX = "bloom:name:";
 
     @PostConstruct
     public void init() {
