@@ -24,4 +24,7 @@ jwtSecret: 124823
 # 单位： 分钟
 expire: 3
 # 每秒接收多少人的请求
-requests: 3
+requests: 30
+
+
+

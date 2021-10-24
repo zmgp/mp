@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -1348,5 +1349,9 @@ public class RedisUtil {
      */
     public Cursor<TypedTuple<String>> zScan(String key, ScanOptions options) {
         return redisTemplate.opsForZSet().scan(key, options);
+    }
+
+    public Object execute(DefaultRedisScript<Boolean> luaScript, List<String> params) {
+        return redisTemplate.execute(luaScript, params);
     }
 }

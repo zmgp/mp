@@ -1,12 +1,15 @@
 package com.shu.ming.mp;
 
+import com.shu.ming.mp.util.EmailUtil;
 import com.shu.ming.mp.util.IdentifyCode;
+import lombok.AllArgsConstructor;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
+@AllArgsConstructor
 class MpApplicationTests {
 
     @Test
@@ -16,7 +19,7 @@ class MpApplicationTests {
         email.setHostName("smtp.qq.com");//邮箱的SMTP服务器，qq邮箱为smtp.qq.com
         email.setCharset("utf-8");//设置发送的字符类型
         try {
-            email.addTo("1017459962@qq.com");
+            email.addTo("535537198@qq.com");
             email.setFrom("1017459962@qq.com","ming");
             email.setAuthentication("1017459962@qq.com","fpzchkdyoravbdfg");//设置发送人的邮箱和授权码
             email.setSubject("mp平台用户注册码");//设置发送主题
@@ -27,5 +30,15 @@ class MpApplicationTests {
             e.printStackTrace();
         }
     }
+
+
+    @Test
+    void sendEmail(){
+        EmailUtil.sendEmail("535537198@qq.com",  "jie测试", "hello");
+    }
+
+
+//    RedisBloomFilterService filterService;
+
 
 }

@@ -24,6 +24,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+
 @RestController
 @Slf4j
 @Api("注册功能")
@@ -40,6 +41,7 @@ import java.util.List;
 public class RegisterController {
 
     private RegisterService registerService;
+
 
     @ApiOperation("用户信息注册")
     @PostMapping("/register")
