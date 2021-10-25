@@ -1,12 +1,12 @@
 package com.shu.ming.mp.modules.login.controller;
 
-import com.shu.ming.mp.domain.Result;
-import com.shu.ming.mp.enums.ResultCode;
+import com.shu.ming.mp.commons.domain.Result;
+import com.shu.ming.mp.commons.enums.ResultCode;
 import com.shu.ming.mp.modules.login.bean.UserInfo;
 import com.shu.ming.mp.modules.login.dto.LoginDTO;
 import com.shu.ming.mp.modules.login.service.AuthorityService;
 import com.shu.ming.mp.modules.login.service.LoginService;
-import com.shu.ming.mp.util.JWTUtils;
+import com.shu.ming.mp.commons.util.JWTUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;

@@ -1,14 +1,14 @@
 package com.shu.ming.mp.modules.websocket.controller;
 
-import com.shu.ming.mp.annotation.RequestLimit;
-import com.shu.ming.mp.domain.Result;
+import com.maxmind.geoip2.DatabaseReader;
+import com.shu.ming.mp.commons.annotation.PassToken;
+import com.shu.ming.mp.commons.domain.Result;
+import com.shu.ming.mp.commons.util.IPUtil;
 import com.shu.ming.mp.modules.websocket.service.WebService;
-import com.shu.ming.mp.util.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 public class WebSocketController {
 
     private WebService webService;
+    DatabaseReader databaseReader;
 
     @GetMapping("/get/send")
     @ApiOperation("发送get")
@@ -51,4 +52,16 @@ public class WebSocketController {
         return Result.success(webService.size());
     }
 
+    @GetMapping("/onLine")
+    @ApiOperation("获得当前在线信息")
+    public Result getOnLinePeople(){
+        return Result.success(webService.onLinePeople());
+    }
+
+    @PassToken
+    @GetMapping("/ip")
+    @ApiOperation("进行ip映射")
+    public Result ip(@RequestParam("message") String ip) throws Exception {
+        return Result.success(IPUtil.getAddress(databaseReader, ip));
+    }
 }

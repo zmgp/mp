@@ -19,12 +19,15 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+
+
 # jwt配置
 jwtSecret: 124823
 # 单位： 分钟
-expire: 3
+expire: 300
 # 每秒接收多少人的请求
 requests: 30
+ip-database-path: src/main/resources/GeoLite2-City.mmdb
 
 
 

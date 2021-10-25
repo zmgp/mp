@@ -1,7 +1,9 @@
 package com.shu.ming.mp.modules.websocket.service;
 
+import com.shu.ming.mp.modules.websocket.bean.OnLinePeople;
 import com.shu.ming.mp.modules.websocket.bean.WebSocket;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,7 +14,7 @@ public interface WebService {
     /**
      * 在容器中的名字
      */
-    String WEBSOCKET_MANAGER_NAME  = "webService";
+    public String WEBSOCKET_MANAGER_NAME  = "webService";
 
     /**
      * 根据标识获取websocket session
@@ -39,6 +41,18 @@ public interface WebService {
      * @return WebSocket Map
      */
     Map<String , WebSocket> localWebSocketMap();
+
+    /**
+     * 获取当前机器上得在线人数
+     * @return WebSocket Map
+     */
+    List<OnLinePeople> onLinePeople();
+
+    /**
+     * 获取当前机器上得在线人数
+     * @return WebSocket Map
+     */
+    Map<String, OnLinePeople> onLinePeopleMap();
 
     /**
      * 统计所有在线人数

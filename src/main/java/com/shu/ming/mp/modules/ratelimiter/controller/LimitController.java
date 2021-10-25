@@ -1,7 +1,7 @@
 package com.shu.ming.mp.modules.ratelimiter.controller;
 
-import com.shu.ming.mp.annotation.RequestLimit;
-import com.shu.ming.mp.domain.Result;
+import com.shu.ming.mp.commons.annotation.RequestLimit;
+import com.shu.ming.mp.commons.domain.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;

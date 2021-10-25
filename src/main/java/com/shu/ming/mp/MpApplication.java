@@ -9,6 +9,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.*;
 
@@ -18,6 +19,7 @@ import java.util.*;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableAsync
 @EnableScheduling
+@EnableSwagger2
 public class MpApplication implements WebMvcConfigurer {
 
     public static void main(String[] args) {

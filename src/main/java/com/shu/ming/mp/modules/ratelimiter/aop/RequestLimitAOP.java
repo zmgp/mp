@@ -1,8 +1,8 @@
 package com.shu.ming.mp.modules.ratelimiter.aop;
 
-import com.shu.ming.mp.annotation.RequestLimit;
-import com.shu.ming.mp.exception.AccessLimitException;
-import com.shu.ming.mp.util.RedisUtil;
+import com.shu.ming.mp.commons.annotation.RequestLimit;
+import com.shu.ming.mp.commons.exception.AccessLimitException;
+import com.shu.ming.mp.commons.util.RedisUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;

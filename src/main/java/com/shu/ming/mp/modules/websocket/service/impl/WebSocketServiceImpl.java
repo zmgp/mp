@@ -1,20 +1,22 @@
 package com.shu.ming.mp.modules.websocket.service.impl;
 
+import com.shu.ming.mp.modules.websocket.bean.OnLinePeople;
 import com.shu.ming.mp.modules.websocket.bean.WebSocket;
 import com.shu.ming.mp.modules.websocket.service.WebService;
-import com.shu.ming.mp.util.BloomFilterUtil;
-import com.shu.ming.mp.util.RedisUtil;
-import com.shu.ming.mp.util.WebSocketUtil;
+import com.shu.ming.mp.commons.util.BloomFilterUtil;
+import com.shu.ming.mp.commons.util.RedisUtil;
+import com.shu.ming.mp.commons.util.WebSocketUtil;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * @author JGod
@@ -33,7 +35,8 @@ public class WebSocketServiceImpl implements WebService {
     /**
      * 因为全局只有一个 WebSocketManager ，所以才敢定义为非static
      */
-    private final Map<String, WebSocket> connections = new ConcurrentHashMap<>(100);
+    private final Map<String, WebSocket> connections = new ConcurrentHashMap<>(128);
+    private final Map<String, OnLinePeople> onLines = new ConcurrentHashMap<>(128);
 
     @Override
     public WebSocket get(String identifier) {
@@ -44,9 +47,9 @@ public class WebSocketServiceImpl implements WebService {
     public void put(String identifier, WebSocket webSocket) {
         log.info("用户 {} 上线了：", identifier);
         connections.put(identifier , webSocket);
+        saveOnLinePeople(webSocket);
 
         Set<String> keys = redisUtil.keys(PREFIX.concat(identifier).concat(":").concat("*"));
-
         keys.stream().sorted().forEach(
                 (key) -> {
                     WebSocketUtil.sendMessage(webSocket.getSession() , redisUtil.get(key));
@@ -58,12 +61,23 @@ public class WebSocketServiceImpl implements WebService {
     @Override
     public void remove(String identifier) {
         connections.remove(identifier);
+        onLines.remove(identifier);
     }
 
 
     @Override
     public Map<String, WebSocket> localWebSocketMap() {
         return connections;
+    }
+
+    @Override
+    public List<OnLinePeople> onLinePeople() {
+        return new ArrayList<>(onLines.values());
+    }
+
+    @Override
+    public Map<String, OnLinePeople> onLinePeopleMap() {
+        return onLines;
     }
 
     @Override
@@ -111,5 +125,16 @@ public class WebSocketServiceImpl implements WebService {
 
     private void saveRedis(String name, String msg){
         redisUtil.set(PREFIX.concat(name).concat(":").concat(LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli() + ""), msg);
+    }
+
+    private void saveOnLinePeople(WebSocket webSocket){
+        if (!onLines.containsKey(webSocket.getIdentifier())){
+            OnLinePeople people = new OnLinePeople();
+            people.setName(webSocket.getIdentifier());
+            people.setUpTime(LocalDateTime.now());
+            onLines.put(webSocket.getIdentifier(), people);
+        }else {
+            onLines.get(webSocket.getIdentifier()).setUpTime(LocalDateTime.now());
+        }
     }
 }
