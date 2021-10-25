@@ -5,7 +5,7 @@
 </head>
 
 <body>
-Welcome guo<br/>
+Welcome everyone<br/>
 <input id="text" type="text" /><button onclick="send()">Send</button>    <button onclick="closeWebSocket()">Close</button>
 <div id="status"></div>
 <div id="message" style="margin-top: 20px; margin-left: 20px;"></div>
@@ -23,7 +23,7 @@ Welcome guo<br/>
     }
 
     function connect(){
-        websocket = new WebSocket("ws://127.0.0.1:8083/mp/connect/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlck5hbWUiOiJqaWUiLCJhdXRob3JpdHkiOlsyMDAsMzAwXSwiZXhwIjoxNjM1MTY4NDAxfQ.n_CtkJ4DgaFlEOUgtTxeZfkRCDbPTwDAvKWTiZQ_36g");
+        websocket = new WebSocket("ws://mp.free.idcfengye.com/mp/connect/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidXNlck5hbWUiOiJqaWUiLCJhdXRob3JpdHkiOlsyMDAsMzAwXSwiZXhwIjoxNjM1MTY4NDAxfQ.n_CtkJ4DgaFlEOUgtTxeZfkRCDbPTwDAvKWTiZQ_36g");
         //连接发生错误的回调方法
         websocket.onerror = function(){
             setStatusInnerHTML("error");

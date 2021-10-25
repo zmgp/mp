@@ -93,7 +93,7 @@ public class IPUtil {
             String f = "-";
             return country+f+province+f+city;
         }catch (Exception e){
-            log.error("发生了一个异常: {}", e.getMessage());
+            log.warn("发生了一个异常: {}", e.getMessage());
         }
         return "地址解析失败";
     }
