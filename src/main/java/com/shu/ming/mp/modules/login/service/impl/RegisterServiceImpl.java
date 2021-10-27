@@ -3,7 +3,9 @@ package com.shu.ming.mp.modules.login.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shu.ming.mp.modules.login.bean.Demo;
 import com.shu.ming.mp.modules.login.bean.UserInfo;
+import com.shu.ming.mp.modules.login.dto.Convert;
 import com.shu.ming.mp.modules.login.dto.LoginDTO;
+import com.shu.ming.mp.modules.login.dto.RegisterDTO;
 import com.shu.ming.mp.modules.login.mapper.DemoMapper;
 import com.shu.ming.mp.modules.login.mapper.LoginMapper;
 import com.shu.ming.mp.modules.login.mapper.RegisterMapper;
@@ -30,5 +32,11 @@ public class RegisterServiceImpl extends ServiceImpl<RegisterMapper, UserInfo> i
     public UserInfo findUserByName(String username) {
         UserInfo user = registerMapper.findUserByName(username);
         return user;
+    }
+
+    @Override
+    public void insertOneUser(RegisterDTO registerDTO) {
+        UserInfo userInfo = Convert.convertToRegisterDTO(registerDTO);
+        registerMapper.insertOneUser(userInfo);
     }
 }

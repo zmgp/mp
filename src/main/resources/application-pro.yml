@@ -19,7 +19,7 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
+  mapper-locations: classpath:mybatis/mapper/*.xml #有错误
 
 # es
 elasticsearch:
@@ -40,5 +40,12 @@ expire: 300
 requests: 30
 ip-database-path: src/main/resources/GeoLite2-City.mmdb
 
+#emailHost 发送邮箱
+emailHost: 1017459962@qq.com
 
-
+#发送邮箱授权码
+emailPd: ming
+#发送邮箱smtp服务器
+hostname: smtp.qq.com
+#设置发送的字符类型
+charset: utf-8
