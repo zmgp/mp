@@ -17,6 +17,9 @@ import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 
 @RestController
 @Slf4j
@@ -38,11 +41,15 @@ public class RegisterController {
      */
     @ApiOperation("用户信息注册")
     @PostMapping("/register")
-    public Result registerpage1 ( @RequestBody RegisterDTO registerDTO) {
+    public Result registerpage1 ( @RequestBody RegisterDTO registerDTO,HttpServletRequest request) {
         // 判断当前用户是否存在
         UserInfo user = registerService.findUserByName(registerDTO.getUsername());
-        if (user != null){  //已存在用户 跳转发邮箱
+        if (user != null){  //已存在用户 跳转判断邮箱是否重复 邮箱
             return Result.failure(ResultCode.USER_HAS_EXISTED);
+        }
+
+        if(! registerService.existEmailAddress(registerDTO.getEmail())){
+            return Result.failure(ResultCode.DATA_ALREADY_EXISTED);
         }
 //        //根据用户邮箱发送邮件
 //        HtmlEmail email=new HtmlEmail();//创建一个HtmlEmail实例对象
@@ -60,22 +67,45 @@ public class RegisterController {
 //            e.printStackTrace();
 //        }
         String code = IdentifyCode.code();
+        HttpSession session = request.getSession(false);
+        if(session == null){
+            //创建session，并拿到JSESSIONID
+            session = request.getSession();
+        }
+        //设置session有效时间，默认是1800s
+        session.setMaxInactiveInterval(1200);
+        //将验证码放入session中
+        session.setAttribute("code",code);
         EmailUtil.sendRegisterEmail(registerDTO,code);
-        return Result.success(code);
+        return Result.success();
     }
 
-    @ApiOperation("email再次发送")
+    @ApiOperation("email确认成功后注册成功 用户信息写入数据库")
     @PostMapping("/emailReg")
-    public Result registerPage2(@RequestBody RegisterDTO registerDTO){
-        UserInfo user = registerService.findUserByName(registerDTO.getUsername());
-        String code = IdentifyCode.code();
-        EmailUtil.sendRegisterEmail(registerDTO,code);
-        return Result.success(code);
+    public Result registerPage2(@RequestBody RegisterDTO registerDTO, @RequestParam String mycode, HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if(session == null){
+            session = request.getSession();
+        }
+        String code1 = session.getAttribute("code").toString();
+        if(mycode.equals(code1)){
+            registerService.insertOneUser(registerDTO);
+            return Result.success();
+        }
+        return Result.failure(ResultCode.DATA_IS_WRONG);
     }
-    @ApiOperation("注册成功 用户信息写入数据库")
-    @PostMapping("/regsuccess")
-    public Result regTologin(@RequestBody RegisterDTO registerDTO){
-        registerService.insertOneUser(registerDTO);
+
+
+    @ApiOperation("email重发")
+    @PostMapping("/emailResend")
+    public Result emailResend(@RequestBody RegisterDTO registerDTO, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String code = IdentifyCode.code();
+        //设置session有效时间，默认是1800s
+        session.setMaxInactiveInterval(1200);
+        //将验证码放入session中
+        session.setAttribute("code",code);
+        EmailUtil.sendRegisterEmail(registerDTO,code);
         return Result.success();
     }
 

@@ -15,7 +15,6 @@ import com.shu.ming.mp.modules.websocket.bean.OnLinePeople;
 import com.shu.ming.mp.modules.websocket.bean.WebSocket;
 import com.shu.ming.mp.modules.websocket.service.WebService;
 import com.shu.ming.mp.commons.util.RedisUtil;
-import javafx.util.converter.LocalDateTimeStringConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;

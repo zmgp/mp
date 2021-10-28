@@ -21,4 +21,11 @@ public interface RegisterMapper  extends BaseMapper<UserInfo> {
      *新增一个用户 不知道mybatis mapper.xml怎么配
      */
     void insertOneUser(UserInfo userInfo);
+
+    /*
+     * 判断是否存在邮箱
+     */
+    @Select("select * from user_info where email = #{email}")
+    UserInfo existEmailAddress(@Param("email") String email);
+
 }

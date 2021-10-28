@@ -24,10 +24,6 @@ public interface LoginMapper extends BaseMapper<UserInfo> {
      */
     UserInfo findUserById(@Param("id") int id );
 
-    /*
-     *查询当前用户的权限
-     */
-    @Select("select * from authority where user_id = #{userId}")
-    Authority getAuthorityById(@Param("userId") int UserId);
+
 
 }

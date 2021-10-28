@@ -39,4 +39,14 @@ public class RegisterServiceImpl extends ServiceImpl<RegisterMapper, UserInfo> i
         UserInfo userInfo = Convert.convertToRegisterDTO(registerDTO);
         registerMapper.insertOneUser(userInfo);
     }
+
+    @Override
+    public boolean existEmailAddress(String email) {
+        UserInfo userInfo = registerMapper.existEmailAddress(email);
+        if (userInfo == null){
+            return true;
+        }
+        return false;
+
+    }
 }

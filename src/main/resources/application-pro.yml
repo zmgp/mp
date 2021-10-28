@@ -19,7 +19,7 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapper-locations: classpath:mybatis/mapper/*.xml #有错误
+  mapper-locations: src/main/java/com/shu/mp/modules/mapper/xml           #有错误
 
 # es
 elasticsearch:
