@@ -76,6 +76,8 @@ public class RegisterController {
         session.setMaxInactiveInterval(1200);
         //将验证码放入session中
         session.setAttribute("code",code);
+        //将用户邮箱放入session中 防止用户篡改
+        session.setAttribute("email",registerDTO.getEmail());
         EmailUtil.sendRegisterEmail(registerDTO,code);
         return Result.success();
     }
@@ -87,11 +89,20 @@ public class RegisterController {
         if(session == null){
             session = request.getSession();
         }
-        String code1 = session.getAttribute("code").toString();
-        if(mycode.equals(code1)){
-            registerService.insertOneUser(registerDTO);
-            return Result.success();
+        //判断用户有没有瞎改用户名，瞎改了查数据库是否存在 存在返回错误，不存在默许
+        UserInfo user = registerService.findUserByName(registerDTO.getUsername());
+        if (user != null){  //已存在用户 跳转判断邮箱是否重复 邮箱
+            return Result.failure(ResultCode.USER_HAS_EXISTED);
         }
+        String code1 = session.getAttribute("code").toString();
+        String email1 = session.getAttribute("email").toString();
+        if(registerDTO.getEmail().equals(email1)){
+            if(mycode.equals(code1)){
+                registerService.insertOneUser(registerDTO);
+                return Result.success();
+            }
+        }
+
         return Result.failure(ResultCode.DATA_IS_WRONG);
     }
 
