@@ -43,6 +43,7 @@
 * redis
 * devtools
 * geoip2:  进行ip地址与物理地址得映射
+* junit: 测试
 
 ## 数据库
 

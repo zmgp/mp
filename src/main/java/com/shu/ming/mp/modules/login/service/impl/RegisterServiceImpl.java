@@ -11,9 +11,11 @@ import com.shu.ming.mp.modules.login.mapper.LoginMapper;
 import com.shu.ming.mp.modules.login.mapper.RegisterMapper;
 import com.shu.ming.mp.modules.login.service.LoginService;
 import com.shu.ming.mp.modules.login.service.RegisterService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RegisterServiceImpl extends ServiceImpl<RegisterMapper, UserInfo> implements RegisterService {
     private RegisterMapper registerMapper;
 

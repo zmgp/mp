@@ -1,4 +1,4 @@
-package com.shu.ming.mp.modules.login.job;
+package com.shu.ming.mp.modules.websocket.job;
 
 import com.shu.ming.mp.modules.websocket.service.WebService;
 import com.shu.ming.mp.commons.util.RedisUtil;
