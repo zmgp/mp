@@ -39,6 +39,7 @@ public class BloomFilterUtil {
     public void init() {
         log.info("开始初始化 布隆过滤器");
         initEmailBloom();
+        initNameBloom();
         log.info("布隆过滤器初始化完成");
     }
 
@@ -69,7 +70,7 @@ public class BloomFilterUtil {
     }
 
     private void initNameBloom(){
-        Set<String> keys = redisUtil.keys(EMAIL_PREFIX .concat("*"));
+        Set<String> keys = redisUtil.keys(NAME_PREFIX .concat("*"));
         List<String> list = redisUtil.multiGet(keys);
         list.parallelStream().forEach(
                 this::addNameKey
