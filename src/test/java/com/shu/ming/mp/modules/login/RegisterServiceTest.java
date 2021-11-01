@@ -2,6 +2,7 @@ package com.shu.ming.mp.modules.login;
 
 import com.shu.ming.mp.MpApplication;
 import com.shu.ming.mp.anno.MethodName;
+import com.shu.ming.mp.commons.util.EmailUtil;
 import com.shu.ming.mp.modules.login.dto.RegisterDTO;
 import com.shu.ming.mp.modules.login.service.RegisterService;
 import lombok.extern.slf4j.Slf4j;
@@ -45,10 +46,10 @@ public class RegisterServiceTest {
     @Test
     public void testRegister() {
         RegisterDTO registerDTO = new RegisterDTO();
-        registerDTO.setCode("4396");
-        registerDTO.setEmail("110@qq.com");
-        registerDTO.setUsername("jie");
-        registerDTO.setPassword("124823");
+        registerDTO.setEmail("1017459962@qq.com");
+        registerDTO.setUsername("jie1");
+        registerDTO.setPassword("1248231");
+        EmailUtil.sendEmail("1017459962@qq.com","123","123321");
         registerService.insertOneUser(registerDTO);
     }
 

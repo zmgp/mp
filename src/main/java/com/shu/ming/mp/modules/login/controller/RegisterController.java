@@ -1,6 +1,7 @@
 package com.shu.ming.mp.modules.login.controller;
 
 
+import com.shu.ming.mp.commons.annotation.PassToken;
 import com.shu.ming.mp.commons.domain.Result;
 import com.shu.ming.mp.commons.enums.ResultCode;
 import com.shu.ming.mp.commons.util.EmailUtil;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,9 +28,6 @@ import javax.servlet.http.HttpSession;
 @Api("注册功能")
 @RequestMapping("/register")
 @AllArgsConstructor
-@NoArgsConstructor
-
-
 public class RegisterController {
 
     private RegisterService registerService;
@@ -41,6 +40,7 @@ public class RegisterController {
      */
     @ApiOperation("用户信息注册")
     @PostMapping("/register")
+    @PassToken
     public Result registerpage1 ( @RequestBody RegisterDTO registerDTO,HttpServletRequest request) {
         // 判断当前用户是否存在
         UserInfo user = registerService.findUserByName(registerDTO.getUsername());
@@ -79,6 +79,7 @@ public class RegisterController {
         //将用户邮箱放入session中 防止用户篡改
         session.setAttribute("email",registerDTO.getEmail());
         EmailUtil.sendRegisterEmail(registerDTO,code);
+        log.info("邮箱发送");
         return Result.success();
     }
 
