@@ -2,6 +2,9 @@ package com.shu.ming.mp.commons.util;
 
 import cn.hutool.bloomfilter.BitMapBloomFilter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +15,7 @@ import java.util.Set;
  * @author JGod
  * @create 2021-10-16-16:17
  */
+@ConditionalOnBean({RedisUtil.class})
 @Component
 @Slf4j
 public class BloomFilterUtil {

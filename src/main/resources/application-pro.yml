@@ -14,7 +14,8 @@ spring:
       enabled: true
       additional-paths: src/main/java
       exclude: WEB-INF/**
-
+  application:
+    name: mp项目
 
 mybatis-plus:
   configuration:
@@ -27,9 +28,9 @@ elasticsearch:
   connTimeout: 3000
   socketTimeout: 5000
   connectionRequestTimeout: 500
-
-
-
+# 是否使用ES
+es:
+  enable: true
 
 # jwt配置
 jwtSecret: 124823
@@ -39,12 +40,25 @@ expire: 300
 requests: 30
 ip-database-path: src/main/resources/GeoLite2-City.mmdb
 
+
 #emailHost 发送邮箱
 emailHost: 1017459962@qq.com
-
 #发送邮箱授权码
 emailPd: ming
 #发送邮箱smtp服务器
 hostname: smtp.qq.com
 #设置发送的字符类型
 charset: utf-8
+
+
+#线程池配置参数
+task:
+  pool:
+    corePoolSize: 5 #设置核心线程数
+    maxPoolSize: 20  #设置最大线程数
+    keepAliveSeconds: 300 #设置线程活跃时间（秒）
+    queueCapacity: 50 #设置队列容量
+    threadNamePrefix: ASYNC_ # 线程名称前缀
+
+
+debug: true

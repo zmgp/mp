@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ import java.util.Map;
  * @author JGod
  * @create 2021-10-11-11:05
  */
+@ConditionalOnBean(ESUtil.class)
 @Slf4j
 @RestController
 @RequestMapping("/article")

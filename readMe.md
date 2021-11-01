@@ -44,6 +44,7 @@
 * devtools
 * geoip2:  进行ip地址与物理地址得映射
 * junit: 测试
+* easyexcel: excel操作
 
 ## 数据库
 

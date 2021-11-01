@@ -1,5 +1,6 @@
 package com.shu.ming.mp.modules.article.config;
 
+import com.shu.ming.mp.modules.article.service.impl.ArticleServiceImpl;
 import com.shu.ming.mp.modules.article.util.ESUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
@@ -7,6 +8,8 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
  * @create 2021-04-19-19:14
  */
 @Configuration
+@ConditionalOnProperty(value = "es.enable", havingValue = "true")
 @Slf4j
 public class ElasticsearchConfig {
 
@@ -47,6 +51,7 @@ public class ElasticsearchConfig {
 
     @Bean
     public ESUtil esUtil(RestHighLevelClient restHighLevelClient){
+        log.info("生成EsUtil 对象");
         return new ESUtil(restHighLevelClient);
     }
 }

@@ -50,6 +50,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.xnx3.elasticsearch.bean.GroupByListItem;
 import com.xnx3.elasticsearch.jsonFormat.DefaultJsonFormat;
 import com.xnx3.elasticsearch.jsonFormat.JsonFormatInterface;
+import org.springframework.stereotype.Component;
 
 
 /**
