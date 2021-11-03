@@ -155,3 +155,36 @@
 [7368] 01 Nov 18:30:49.071 * Background saving started by pid 24028
 [7368] 01 Nov 18:30:49.289 # fork operation complete
 [7368] 01 Nov 18:30:49.289 * Background saving terminated with success
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 3.2.100 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 20232
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+[20232] 03 Nov 14:59:17.748 # Server started, Redis version 3.2.100
+[20232] 03 Nov 14:59:17.748 * DB loaded from disk: 0.000 seconds
+[20232] 03 Nov 14:59:17.748 * The server is now ready to accept connections on port 6379
+[20232] 03 Nov 15:07:34.057 * 10 changes in 300 seconds. Saving...
+[20232] 03 Nov 15:07:34.059 * Background saving started by pid 21952
+[20232] 03 Nov 15:07:34.278 # fork operation complete
+[20232] 03 Nov 15:07:34.278 * Background saving terminated with success
+[20232] 03 Nov 15:14:21.841 * 10 changes in 300 seconds. Saving...
+[20232] 03 Nov 15:14:21.844 * Background saving started by pid 21988
+[20232] 03 Nov 15:14:21.952 # fork operation complete
+[20232] 03 Nov 15:14:21.955 * Background saving terminated with success
+[20232] 03 Nov 15:19:22.031 * 10 changes in 300 seconds. Saving...
+[20232] 03 Nov 15:19:22.033 * Background saving started by pid 22152
+[20232] 03 Nov 15:19:22.139 # fork operation complete
+[20232] 03 Nov 15:19:22.139 * Background saving terminated with success

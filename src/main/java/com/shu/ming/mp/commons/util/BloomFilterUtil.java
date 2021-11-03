@@ -1,6 +1,7 @@
 package com.shu.ming.mp.commons.util;
 
 import cn.hutool.bloomfilter.BitMapBloomFilter;
+import com.shu.ming.mp.modules.login.dto.RegisterDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
@@ -63,6 +64,11 @@ public class BloomFilterUtil {
     public void addNameKey(String key) {
         NameFilter.add(key);
         redisUtil.set(NAME_PREFIX + key, key);
+    }
+
+    public void addKey(RegisterDTO registerDTO) {
+        addNameKey(registerDTO.getUsername());
+        addEmailKey(registerDTO.getEmail());
     }
 
     private void initEmailBloom(){
