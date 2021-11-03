@@ -1,6 +1,7 @@
 package com.shu.ming.mp.commons.handler;
 
 import cn.hutool.core.exceptions.ValidateException;
+import cn.hutool.extra.mail.MailException;
 import com.shu.ming.mp.commons.domain.Result;
 import com.shu.ming.mp.commons.enums.ResultCode;
 import com.shu.ming.mp.commons.exception.AccessLimitException;
@@ -107,6 +108,16 @@ public class CustomerExceptionHandler {
         return Result.failure(ResultCode.BUSY);
     }
 
+
+    /**
+     * 邮件异常
+     */
+    @ResponseBody
+    @ExceptionHandler({MailException.class})
+    public Result emailException(MailException e){
+        log.warn("邮件发送失败", e);
+        return Result.failure(ResultCode.EMAIL_SEND_ERROR);
+    }
 
     /**
      * 未被捕获的异常信息
