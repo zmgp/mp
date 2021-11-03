@@ -1,5 +1,6 @@
 package com.shu.ming.mp.modules.login.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -24,8 +25,8 @@ public class RegisterDTO {
      */
     @NotBlank(message = "请填写邮箱")
     private String email;
-    /*
-     *邮箱验证码
-     */
-    private String code;
+//    /*
+//     *邮箱验证码
+//     */
+//    private String code;
 }
