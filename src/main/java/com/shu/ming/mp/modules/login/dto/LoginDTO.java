@@ -22,4 +22,10 @@ public class LoginDTO {
      */
     @NotBlank(message = "请填写密码")
     private String password;
+
+    /*
+     * 图形验证码
+     */
+    @NotBlank(message = "请填写验证码")
+    private String idfCode;
 }

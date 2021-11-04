@@ -23,7 +23,7 @@ public class JWTUtils {
 
     public static String secret;
     public static long expire;
-
+//    public static long overDateUnit;
     /**
      * 解析token，获取权限
      * @param token
@@ -54,6 +54,12 @@ public class JWTUtils {
         log.info("设置过期时间为: {} 小时",  expire);
         JWTUtils.expire = expire;
     }
+
+//    @Value("${overDateUnit}")
+//    public void setOverDateUnit(long overDateUnit) {
+//        log.info("设置过期单位为: {} ",  expire);
+//        JWTUtils.overDateUnit = overDateUnit;
+//    }
 
     /**
      * 生成Token

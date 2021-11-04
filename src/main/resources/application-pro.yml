@@ -5,8 +5,8 @@ server:
 spring:
   datasource:
     username: root
-#    password: Mao1680427
-    password: 124823
+    password: Mao1680427
+#    password: 124823
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mp?useSSL=false&serverTimezone=UTC
 
@@ -41,6 +41,8 @@ expire: 300
 requests: 30
 ip-database-path: src/main/resources/GeoLite2-City.mmdb
 
+#时间单位, 天:TimeUnit.DAYS 小时:TimeUnit.HOURS 分钟:TimeUnit.MINUTES
+#     *            秒:TimeUnit.SECONDS 毫秒:TimeUnit.MILLISECONDS
 
 #emailHost 发送邮箱
 emailHost: 1017459962@qq.com

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shu.ming.mp.commons.util.BloomFilterUtil;
 import com.shu.ming.mp.commons.util.EmailUtil;
+import com.shu.ming.mp.commons.util.IdentifyCode;
 import com.shu.ming.mp.commons.util.RedisUtil;
 import com.shu.ming.mp.modules.login.bean.Demo;
 import com.shu.ming.mp.modules.login.bean.UserInfo;
@@ -16,7 +17,6 @@ import com.shu.ming.mp.modules.login.mapper.LoginMapper;
 import com.shu.ming.mp.modules.login.mapper.RegisterMapper;
 import com.shu.ming.mp.modules.login.service.LoginService;
 import com.shu.ming.mp.modules.login.service.RegisterService;
-import javafx.scene.effect.Bloom;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -56,10 +56,11 @@ public class RegisterServiceImpl extends ServiceImpl<RegisterMapper, UserInfo> i
     }
 
     private final String VERIFICATION_CODE_PREFIX = "verification:";
+
     @Async
     @Override
     public void sendRegisterEmail(String email) {
-        String verificationCode = RandomUtil.randomString(6);
+        String verificationCode = IdentifyCode.code();
         redisUtil.setEx(VERIFICATION_CODE_PREFIX.concat(email), verificationCode, 15, TimeUnit.MINUTES);
         EmailUtil.sendVerificationCode(email, verificationCode);
     }
