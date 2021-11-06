@@ -63,3 +63,20 @@ task:
 
 
 debug: true
+
+
+
+dubbo:
+  application:            #应用配置，用于配置当前应用信息，不管该应用是提供者还是消费者。
+    name: mp #应用名称
+  registry:
+    address: zookeeper://127.0.0.1   #注册中心的ip可以直接加上端口，也可以同下面的port设置
+    timeout: 6000   #超时时间设置，太短可能会报错单位是  ms也就是6秒
+    port: 2181
+    check: true
+  metadata-report:
+    address: zookeeper://127.0.0.1:2181
+
+
+modules:
+  email: true
