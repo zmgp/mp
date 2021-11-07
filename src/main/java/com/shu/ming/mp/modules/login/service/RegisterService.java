@@ -37,4 +37,5 @@ public interface RegisterService extends IService<UserInfo> {
      * @return
      */
     boolean judgeVerifyCode(String email, String code);
+
 }

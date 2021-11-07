@@ -15,4 +15,13 @@ public interface LoginService extends IService<UserInfo> {
 
 
     UserInfo findOneByNameAndPwd(String userName, String password);
+
+
+    void setUserJTW(String username,String token);
+
+
+    void setUseritfCode(String uuid,String itfCode);
+
+
+    boolean judgeVerifyCode(String uuid,String itfCode);
 }
