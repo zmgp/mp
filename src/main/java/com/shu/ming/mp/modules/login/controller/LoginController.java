@@ -40,9 +40,9 @@ public class LoginController {
     private AuthorityService authorityService;
 
     @ApiOperation("用户登录")
-    @PostMapping("/login")
+    @PostMapping("/login/{uuid}")
     @PassToken
-    public Result login (@Validated @RequestBody LoginDTO loginDTO, @RequestParam String uuid, HttpServletRequest request, HttpServletResponse response) {
+    public Result login (@Validated @RequestBody LoginDTO loginDTO, @PathVariable("uuid") String uuid, HttpServletRequest request, HttpServletResponse response) {
         //判断验证码是否正确
         boolean flag = loginService.judgeVerifyCode(uuid,loginDTO.getIdfCode());
         if(!flag){
@@ -73,14 +73,17 @@ public class LoginController {
         // 加入redis
         loginService.setUserJTW(user.getUsername(), token);
         //RedisUtil.
-        return Result.success();
+        Map<String, String> myToken = new HashMap<>();
+        myToken.put("token",token);
+        return Result.success(myToken);
     }
 
     @ApiOperation("用户验证码生成")
-    @GetMapping("/captcha")
+    @PostMapping("/captcha/{uuid}")
     @PassToken
-    public void formCaptcha (String uuid,HttpServletRequest request, HttpServletResponse response) {
-                    log.info("啊啊啊");
+    public void formCaptcha (@PathVariable("uuid") String uuid,HttpServletRequest request, HttpServletResponse response) {
+                    log.info("啊啊啊"+uuid);
+
             //设置相应类型,告诉浏览器输出的内容为图片
             response.setContentType("image/jpeg");
             //设置响应头信息，告诉浏览器不要缓存此内容

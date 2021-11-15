@@ -5,8 +5,7 @@ import com.shu.common.modules.email.service.EmailService;
 import com.shu.ming.mp.modules.email.service.IEmailService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -25,6 +24,7 @@ public class IEmailServiceImpl implements IEmailService {
     @Reference(version = "1.0", timeout=50000, check = false)
     private EmailService emailService;
 
+
     @Async
     @Override
     public void senEmail(EmailTemplate email) {
@@ -42,4 +42,5 @@ public class IEmailServiceImpl implements IEmailService {
     public void senEmail(List<String> emails, EmailTemplate emailTemplate) {
         emailService.sendEmail(emails, emailTemplate);
     }
+
 }

@@ -81,4 +81,4 @@ dubbo:
 
 
 modules:
-  email: true
+  email: false

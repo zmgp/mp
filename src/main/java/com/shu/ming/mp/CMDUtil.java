@@ -15,7 +15,8 @@ import java.io.OutputStream;
 public class CMDUtil {
 
     public static void main(String[] args) throws Exception {
-        startRedisServer("D:\\Dai\\Redis-x64-3.2.100\\redis-server.exe D:\\Dai\\Redis-x64-3.2.100\\redis.windows6379.conf");
+        //startRedisServer("D:\\Dai\\Redis-x64-3.2.100\\redis-server.exe D:\\Dai\\Redis-x64-3.2.100\\redis.windows6379.conf");
+        startRedisServer("D:\\Environment\\Redis-x64-3.2.100\\redis-server.exe");
     }
 
     public static void startRedisServer(String cmd) throws Exception {

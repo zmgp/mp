@@ -2,6 +2,8 @@ package com.shu.common.modules.email.service;
 
 import com.shu.common.modules.email.domain.EmailTemplate;
 import com.shu.common.modules.email.domain.EmailType;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
